@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Submit from "./pages/Submit";
 import Marketplace from "./pages/Marketplace";
 import { connectWallet } from "./utils/wallet";
+import YourProjects from "./pages/YourProjects";
 
 const App = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -49,6 +50,12 @@ const App = () => {
             >
               📤 Submit Your Project
             </button>
+            <button
+  className={activeTab === "your-projects" ? "active" : ""}
+  onClick={() => setActiveTab("your-projects")}
+>
+  📁 Your Projects
+</button>
           </div>
         )}
       </header>
@@ -56,6 +63,9 @@ const App = () => {
       <main className="main-content">
         {signer && activeTab === "submit" && <Submit signer={signer} />}
         {signer && activeTab === "marketplace" && <Marketplace signer={signer} />}
+        {signer && activeTab === "your-projects" && (
+  <YourProjects signer={signer} walletAddress={walletAddress} />
+)}
       </main>
     </div>
   );
