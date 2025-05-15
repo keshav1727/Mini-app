@@ -4,9 +4,9 @@ require("dotenv").config();
 module.exports = {
   solidity: "0.8.20",
   networks: {
-    sepolia: {
-      url: process.env.ALCHEMY_KEY,
-      accounts: [process.env.PRIVATE_KEY],
+    baseSepolia: {
+      url: process.env.BASE_SEPOLIA_RPC_URL,
+      accounts: [process.env.PRIVATE_KEY]
     }
   }
 };
