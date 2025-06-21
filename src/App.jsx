@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Submit from "./pages/Submit";
 import Marketplace from "./pages/Marketplace";
 import { connectWallet } from "./utils/wallet";
@@ -8,32 +8,59 @@ const App = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [signer, setSigner] = useState(null);
   const [activeTab, setActiveTab] = useState("marketplace");
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const handleConnect = async () => {
-    const result = await connectWallet();
-    if (result) {
-      setWalletAddress(result.address);
-      setSigner(result.signer);
+    setIsConnecting(true);
+    try {
+      const result = await connectWallet();
+      if (result) {
+        setWalletAddress(result.address);
+        setSigner(result.signer);
+      }
+    } catch (error) {
+      console.error("Connection failed:", error);
+    } finally {
+      setIsConnecting(false);
     }
   };
 
   const handleDisconnect = () => {
     setWalletAddress("");
     setSigner(null);
+    setActiveTab("marketplace");
   };
+
+  // Auto-connect if wallet was previously connected
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (window.ethereum && window.ethereum.selectedAddress) {
+        await handleConnect();
+      }
+    };
+    checkConnection();
+  }, []);
 
   return (
     <div className="app-container">
       <header className="header">
-        <h1>🚀 Idea Marketplace</h1>
+        <h1>💡 Idea Marketplace</h1>
 
         {walletAddress ? (
           <div className="wallet-actions">
             <p>✅ {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</p>
-            <button onClick={handleDisconnect} className="wallet-btn">❌ Disconnect</button>
+            <button onClick={handleDisconnect} className="wallet-btn">
+              🔌 Disconnect
+            </button>
           </div>
         ) : (
-          <button onClick={handleConnect} className="connect-btn">🔗 Connect Wallet</button>
+          <button 
+            onClick={handleConnect} 
+            className="connect-btn"
+            disabled={isConnecting}
+          >
+            {isConnecting ? "🔄 Connecting..." : "🔗 Connect Wallet"}
+          </button>
         )}
 
         {signer && (
@@ -48,24 +75,53 @@ const App = () => {
               className={activeTab === "submit" ? "active" : ""}
               onClick={() => setActiveTab("submit")}
             >
-              📤 Submit Your Project
+              📤 Submit Idea
             </button>
             <button
-  className={activeTab === "your-projects" ? "active" : ""}
-  onClick={() => setActiveTab("your-projects")}
->
-  📁 Your Projects
-</button>
+              className={activeTab === "your-projects" ? "active" : ""}
+              onClick={() => setActiveTab("your-projects")}
+            >
+              📁 Your Projects
+            </button>
           </div>
         )}
       </header>
 
       <main className="main-content">
+        {!signer && (
+          <div className="welcome-section">
+            <div className="welcome-card">
+              <h2>Welcome to the Future of Innovation</h2>
+              <p>
+                Discover, buy, and sell groundbreaking startup ideas on the blockchain. 
+                Connect your wallet to get started and explore a world of entrepreneurial opportunities.
+              </p>
+              <div className="features">
+                <div className="feature">
+                  <span className="feature-icon">🔒</span>
+                  <h3>Secure & Decentralized</h3>
+                  <p>All transactions are secured by blockchain technology</p>
+                </div>
+                <div className="feature">
+                  <span className="feature-icon">💡</span>
+                  <h3>Innovative Ideas</h3>
+                  <p>Access to cutting-edge startup concepts and business models</p>
+                </div>
+                <div className="feature">
+                  <span className="feature-icon">🚀</span>
+                  <h3>Launch Your Vision</h3>
+                  <p>Turn your ideas into reality with our marketplace platform</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {signer && activeTab === "submit" && <Submit signer={signer} />}
         {signer && activeTab === "marketplace" && <Marketplace signer={signer} />}
         {signer && activeTab === "your-projects" && (
-  <YourProjects signer={signer} walletAddress={walletAddress} />
-)}
+          <YourProjects signer={signer} walletAddress={walletAddress} />
+        )}
       </main>
     </div>
   );
