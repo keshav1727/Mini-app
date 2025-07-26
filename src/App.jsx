@@ -3,17 +3,33 @@ import Submit from "./pages/Submit";
 import Marketplace from "./pages/Marketplace";
 import { connectWallet } from "./utils/wallet";
 import YourProjects from "./pages/YourProjects";
+import TelegramMiniApp from "./components/TelegramMiniApp";
+import "./components/TelegramMiniApp.css";
 
 const App = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [signer, setSigner] = useState(null);
   const [activeTab, setActiveTab] = useState("marketplace");
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isTelegram, setIsTelegram] = useState(false);
   const [marketplaceStats, setMarketplaceStats] = useState({
     totalIdeas: 0,
     totalVolume: "0",
     activeCreators: 0
   });
+
+  useEffect(() => {
+    // Check if running in Telegram Web App
+    const checkTelegram = () => {
+      const tg = window.Telegram?.WebApp;
+      if (tg) {
+        setIsTelegram(true);
+        console.log("Running in Telegram Web App");
+      }
+    };
+    
+    checkTelegram();
+  }, []);
 
   const handleConnect = async () => {
     setIsConnecting(true);
@@ -46,6 +62,12 @@ const App = () => {
     checkConnection();
   }, []);
 
+  // If running in Telegram, show Telegram Mini App
+  if (isTelegram) {
+    return <TelegramMiniApp />;
+  }
+
+  // Regular web app interface
   return (
     <div className="app-container">
       <header className="header">
