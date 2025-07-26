@@ -1,0 +1,243 @@
+/* Mini App Styles - Compact and Embeddable */
+.mini-app-container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #f1f5f9;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.mini-app-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Mini Header */
+.mini-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mini-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #38bdf8, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.mini-connect-btn {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mini-connect-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.mini-connect-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mini-wallet {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 12px;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/* Mini Form */
+.mini-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mini-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-input,
+.mini-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.5);
+  color: #f1f5f9;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.mini-input:focus,
+.mini-textarea:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.mini-textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.mini-submit-btn,
+.mini-buy-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.mini-submit-btn:hover:not(:disabled),
+.mini-buy-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.mini-submit-btn:disabled,
+.mini-buy-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mini Idea Card */
+.mini-idea-card {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.mini-idea-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #38bdf8;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.mini-idea-description {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+}
+
+.mini-idea-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+.mini-price {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  font-weight: 600;
+}
+
+.mini-creator {
+  color: #94a3b8;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+/* Mini Placeholder */
+.mini-placeholder {
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+  padding: 40px 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .mini-app-container {
+    max-width: 100%;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  
+  .mini-header h3 {
+    font-size: 16px;
+  }
+  
+  .mini-input,
+  .mini-textarea {
+    padding: 10px;
+    font-size: 13px;
+  }
+  
+  .mini-submit-btn,
+  .mini-buy-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
+
+/* Loading Animation */
+@keyframes mini-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.mini-loading {
+  animation: mini-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Success/Error States */
+.mini-success {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.mini-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+} 

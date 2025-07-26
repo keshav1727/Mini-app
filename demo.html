@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Marketplace Mini App - Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .demo-section h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .demo-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+        
+        .widget-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .feature h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💡 Idea Marketplace Mini App</h1>
+            <p>Embeddable Web3 widget for buying and selling innovative ideas</p>
+        </div>
+        
+        <div class="demo-grid">
+            <div class="demo-section">
+                <h2>📤 Submit Ideas</h2>
+                <p>Users can submit their startup ideas with title, description, and pricing directly from any website.</p>
+                
+                <div class="controls">
+                    <button class="btn active" onclick="switchMode('submit')">Submit Mode</button>
+                    <button class="btn" onclick="switchMode('view')">View Mode</button>
+                </div>
+                
+                <div class="widget-container">
+                    <div id="widget-demo-1"></div>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>🛒 Purchase Ideas</h2>
+                <p>Browse and purchase exclusive access to innovative startup concepts with one-click transactions.</p>
+                
+                <div class="controls">
+                    <button class="btn" onclick="loadRandomIdea()">Load Random Idea</button>
+                    <button class="btn" onclick="clearWidget()">Clear Widget</button>
+                </div>
+                
+                <div class="widget-container">
+                    <div id="widget-demo-2"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🔗</span>
+                <h3>Easy Integration</h3>
+                <p>One line of code to embed the widget on any website or platform</p>
+            </div>
+            
+            <div class="feature">
+                <span class="feature-icon">🔒</span>
+                <h3>Web3 Secure</h3>
+                <p>Built on Ethereum blockchain with MetaMask integration for secure transactions</p>
+            </div>
+            
+            <div class="feature">
+                <span class="feature-icon">📱</span>
+                <h3>Mobile Ready</h3>
+                <p>Fully responsive design that works perfectly on all devices</p>
+            </div>
+            
+            <div class="feature">
+                <span class="feature-icon">⚡</span>
+                <h3>Lightning Fast</h3>
+                <p>Optimized for performance with minimal loading time</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Widget Script -->
+    <script src="./dist/widget.js"></script>
+    <script>
+        let currentMode = 'submit';
+        let currentIdeaId = null;
+        
+        // Initialize first widget
+        function initWidget1() {
+            window.initIdeaMarketplaceWidget({
+                mode: 'submit',
+                width: '400px'
+            });
+        }
+        
+        // Initialize second widget
+        function initWidget2() {
+            window.initIdeaMarketplaceWidget({
+                mode: 'view',
+                ideaId: '1',
+                width: '400px'
+            });
+        }
+        
+        // Switch modes
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Clear and reinitialize widget
+            clearWidget();
+            setTimeout(() => {
+                window.initIdeaMarketplaceWidget({
+                    mode: mode,
+                    ideaId: currentIdeaId,
+                    width: '400px'
+                });
+            }, 100);
+        }
+        
+        // Load random idea
+        function loadRandomIdea() {
+            currentIdeaId = Math.floor(Math.random() * 10) + 1;
+            clearWidget();
+            setTimeout(() => {
+                window.initIdeaMarketplaceWidget({
+                    mode: 'view',
+                    ideaId: currentIdeaId.toString(),
+                    width: '400px'
+                });
+            }, 100);
+        }
+        
+        // Clear widget
+        function clearWidget() {
+            const container = document.getElementById('widget-demo-1');
+            if (container) {
+                container.innerHTML = '';
+            }
+        }
+        
+        // Success callback
+        window.ideaMarketplaceSuccessCallback = function(message) {
+            console.log('Success:', message);
+            // You could show a toast notification here
+            alert(message);
+        };
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                initWidget1();
+                initWidget2();
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

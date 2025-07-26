@@ -9,6 +9,11 @@ const App = () => {
   const [signer, setSigner] = useState(null);
   const [activeTab, setActiveTab] = useState("marketplace");
   const [isConnecting, setIsConnecting] = useState(false);
+  const [marketplaceStats, setMarketplaceStats] = useState({
+    totalIdeas: 0,
+    totalVolume: "0",
+    activeCreators: 0
+  });
 
   const handleConnect = async () => {
     setIsConnecting(true);
@@ -96,6 +101,23 @@ const App = () => {
                 Discover, buy, and sell groundbreaking startup ideas on the blockchain. 
                 Connect your wallet to get started and explore a world of entrepreneurial opportunities.
               </p>
+              
+              {/* Marketplace Stats */}
+              <div className="marketplace-stats-overview">
+                <div className="stat-item">
+                  <span className="stat-number">{marketplaceStats.totalIdeas}</span>
+                  <span className="stat-label">Ideas Available</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">{marketplaceStats.totalVolume} ETH</span>
+                  <span className="stat-label">Total Volume</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">{marketplaceStats.activeCreators}</span>
+                  <span className="stat-label">Active Creators</span>
+                </div>
+              </div>
+              
               <div className="features">
                 <div className="feature">
                   <span className="feature-icon">🔒</span>
