@@ -127,32 +127,32 @@ const App = () => {
               {/* Marketplace Stats */}
               <div className="marketplace-stats-overview">
                 <div className="stat-item">
-                  <span className="stat-number">{marketplaceStats.totalIdeas}</span>
+                  {/* <span className="stat-number">{marketplaceStats.totalIdeas}</span> */}
                   {/* <span className="stat-label">Ideas Available</span> */}
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">{marketplaceStats.totalVolume} ETH</span>
+                  {/* <span className="stat-number">{marketplaceStats.totalVolume} ETH</span> */}
                   {/* <span className="stat-label">Total Volume</span> */}
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">{marketplaceStats.activeCreators}</span>
+                  {/* <span className="stat-number">{marketplaceStats.activeCreators}</span> */}
                   {/* <span className="stat-label">Active Creators</span> */}
                 </div>
               </div>
               
               <div className="features">
                 <div className="feature">
-                  <span className="feature-icon">🔒</span>
+                  {/* <span className="feature-icon">🔒</span> */}
                   {/* <h3>Secure & Decentralized</h3>
                   <p>All transactions are secured by blockchain technology</p> */}
                 </div>
                 <div className="feature">
-                  <span className="feature-icon">💡</span>
+                  {/* <span className="feature-icon">💡</span> */}
                   {/* <h3>Innovative Ideas</h3>
                   <p>Access to cutting-edge startup concepts and business models</p> */}
                 </div>
                 <div className="feature">
-                  <span className="feature-icon">🚀</span>
+                  {/* <span className="feature-icon">🚀</span> */}
                   {/* <h3>Launch Your Vision</h3>
                   <p>Turn your ideas into reality with our marketplace platform</p> */}
                 </div>
