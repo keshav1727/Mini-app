@@ -118,43 +118,43 @@ const App = () => {
         {!signer && (
           <div className="welcome-section">
             <div className="welcome-card">
-              <h2>Welcome to the Future of Innovation</h2>
-              <p>
+              {/* <h2>Welcome to the Future of Innovation</h2> */}
+              {/* <p>
                 Discover, buy, and sell groundbreaking startup ideas on the blockchain. 
                 Connect your wallet to get started and explore a world of entrepreneurial opportunities.
-              </p>
+              </p> */}
               
               {/* Marketplace Stats */}
               <div className="marketplace-stats-overview">
                 <div className="stat-item">
                   <span className="stat-number">{marketplaceStats.totalIdeas}</span>
-                  <span className="stat-label">Ideas Available</span>
+                  {/* <span className="stat-label">Ideas Available</span> */}
                 </div>
                 <div className="stat-item">
                   <span className="stat-number">{marketplaceStats.totalVolume} ETH</span>
-                  <span className="stat-label">Total Volume</span>
+                  {/* <span className="stat-label">Total Volume</span> */}
                 </div>
                 <div className="stat-item">
                   <span className="stat-number">{marketplaceStats.activeCreators}</span>
-                  <span className="stat-label">Active Creators</span>
+                  {/* <span className="stat-label">Active Creators</span> */}
                 </div>
               </div>
               
               <div className="features">
                 <div className="feature">
                   <span className="feature-icon">🔒</span>
-                  <h3>Secure & Decentralized</h3>
-                  <p>All transactions are secured by blockchain technology</p>
+                  {/* <h3>Secure & Decentralized</h3>
+                  <p>All transactions are secured by blockchain technology</p> */}
                 </div>
                 <div className="feature">
                   <span className="feature-icon">💡</span>
-                  <h3>Innovative Ideas</h3>
-                  <p>Access to cutting-edge startup concepts and business models</p>
+                  {/* <h3>Innovative Ideas</h3>
+                  <p>Access to cutting-edge startup concepts and business models</p> */}
                 </div>
                 <div className="feature">
                   <span className="feature-icon">🚀</span>
-                  <h3>Launch Your Vision</h3>
-                  <p>Turn your ideas into reality with our marketplace platform</p>
+                  {/* <h3>Launch Your Vision</h3>
+                  <p>Turn your ideas into reality with our marketplace platform</p> */}
                 </div>
               </div>
             </div>

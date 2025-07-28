@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .telegram-simulator {
+            max-width: 375px;
+            margin: 20px auto;
+            background: #000000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .telegram-header {
+            background: #0ea5e9;
+            padding: 16px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .telegram-content {
+            height: 600px;
+            overflow: hidden;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .test-info {
+            max-width: 375px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 12px;
+            color: #ffffff;
+        }
+        
+        .test-info h3 {
+            color: #0ea5e9;
+            margin-bottom: 10px;
+        }
+        
+        .test-info p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .test-btn {
+            padding: 8px 16px;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .test-btn:hover {
+            background: #0284c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="telegram-simulator">
+        <div class="telegram-header">
+            💡 Idea Marketplace
+        </div>
+        <div class="telegram-content">
+            <iframe src="http://localhost:4173/" id="app-frame"></iframe>
+        </div>
+    </div>
+    
+    <div class="test-info">
+        <h3>🧪 Telegram Mini App Test</h3>
+        <p>This simulates how your app will look in Telegram</p>
+        <p><strong>Status:</strong> <span id="status">Loading...</span></p>
+        <p><strong>Features:</strong></p>
+        <ul>
+            <li>✅ Telegram Web App detection</li>
+            <li>✅ Mobile-optimized UI</li>
+            <li>✅ Web3 wallet integration</li>
+            <li>✅ Haptic feedback simulation</li>
+        </ul>
+        
+        <div class="test-buttons">
+            <button class="test-btn" onclick="refreshApp()">🔄 Refresh</button>
+            <button class="test-btn" onclick="toggleTheme()">🌙 Toggle Theme</button>
+            <button class="test-btn" onclick="simulateHaptic()">📳 Haptic Test</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulate Telegram Web App environment
+        window.Telegram = {
+            WebApp: {
+                ready: () => console.log('Telegram WebApp ready'),
+                expand: () => console.log('Telegram WebApp expanded'),
+                setHeaderColor: (color) => console.log('Header color set:', color),
+                setBackgroundColor: (color) => console.log('Background color set:', color),
+                enableClosingConfirmation: () => console.log('Closing confirmation enabled'),
+                initDataUnsafe: {
+                    user: {
+                        id: 123456789,
+                        username: 'testuser',
+                        first_name: 'Test',
+                        last_name: 'User',
+                        language_code: 'en'
+                    }
+                },
+                colorScheme: 'dark',
+                viewportHeight: 600,
+                platform: 'android',
+                MainButton: {
+                    setText: (text) => console.log('Main button text:', text),
+                    onClick: (callback) => console.log('Main button callback set'),
+                    show: () => console.log('Main button shown'),
+                    hide: () => console.log('Main button hidden')
+                },
+                BackButton: {
+                    onClick: (callback) => console.log('Back button callback set'),
+                    show: () => console.log('Back button shown'),
+                    hide: () => console.log('Back button hidden')
+                },
+                showAlert: (message) => alert('Telegram Alert: ' + message),
+                showConfirm: (message, callback) => {
+                    const result = confirm('Telegram Confirm: ' + message);
+                    callback(result);
+                },
+                close: () => console.log('Telegram WebApp close'),
+                HapticFeedback: {
+                    impactOccurred: (style) => console.log('Haptic feedback:', style)
+                },
+                shareMessage: (message) => console.log('Share message:', message),
+                openLink: (url) => window.open(url, '_blank'),
+                openTelegramLink: (url) => console.log('Open Telegram link:', url)
+            }
+        };
+
+        // Update status
+        document.getElementById('status').textContent = 'Telegram environment simulated';
+
+        // Test functions
+        function refreshApp() {
+            document.getElementById('app-frame').src = document.getElementById('app-frame').src;
+        }
+
+        function toggleTheme() {
+            const webApp = window.Telegram.WebApp;
+            const currentTheme = webApp.colorScheme;
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            webApp.colorScheme = newTheme;
+            console.log('Theme toggled to:', newTheme);
+        }
+
+        function simulateHaptic() {
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+            alert('Haptic feedback simulated!');
+        }
+
+        // Listen for messages from iframe
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'telegram-action') {
+                console.log('Telegram action:', event.data.action);
+            }
+        });
+    </script>
+</body>
+</html> 
